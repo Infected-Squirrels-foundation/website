@@ -24,13 +24,20 @@
             </header>
 
             <div class="workspace">
-                <textarea cols="30" rows="10" id="teletype" placeholder="Type your uselesss code here..."></textarea>
+                <textarea cols="30" rows="10" id="teletype" placeholder="Type your uselesss code here...">1010100011001100010101010001010</textarea>
+                <div class="paper_wrap"></div>
             </div>
+            <div class="buttons">
+                <button onClick="go()">send</button>
+            </div>
+
+            <span class="width_template">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
             
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='paper.js') }}"></script>
         <script>
             $(function(){
                 blink = function(e, color){

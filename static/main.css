@@ -5,11 +5,17 @@ body {
 	font-family: courier, monospace;
 }
 
+html, body {
+	height: 100%;
+	overflow: hidden; 
+}
+
 .container {
 	margin: 1em auto;
 	background-color: rgba(255, 255, 255, 0.6);
 	width: 900px;
 	position: relative;
+	height: 100%;
 }
 
 .logo {
@@ -27,10 +33,6 @@ body {
 	margin: 0 auto;
 	display: inline-block;
 	text-align: center;
-	-moz-transition: font-size .3s ease-in;
-	-webkit-transition: font-size .3s ease-in;
-	-o-transition: font-size .3s ease-in;
-	transition: font-size .3s ease-in;
 }
 
 textarea { 
@@ -51,4 +53,22 @@ textarea {
 .workspace {
 	background: white;
 	opacity: 1;
+	position: relative;
+}
+
+.paper_wrap {
+	width: 900px;
+	position: absolute;
+	top:0;
+}
+
+.paper {
+ 	margin: 0 auto;
+	background: white;
+	width:900px;
+	word-wrap: break-word;
+	-moz-transition: width 1s ease-in;
+	-webkit-transition: width 1s ease-in;
+	-o-transition: width 1s ease-in;
+	transition: width 1s ease-in;
 }
