@@ -1,1 +1,1 @@
-official website of [BoudotCode Programming Language](https://github.com/Infected-Squirrels-ltd/boudot-code)
+official website of [BaudotCode Programming Language](https://github.com/Infected-Squirrels-foundation/baudot-code)
