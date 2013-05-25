@@ -1,0 +1,3 @@
+[submodule "baudot-code"]
+	path = baudot-code
+	url = git@github.com:Infected-Squirrels-foundation/baudot-code.git
