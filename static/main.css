@@ -1,0 +1,54 @@
+body {
+	background-image: url(bglogin.jpg);
+	background-repeat: repeat-x;
+	background-color: #000000;
+	font-family: courier, monospace;
+}
+
+.container {
+	margin: 1em auto;
+	background-color: rgba(255, 255, 255, 0.6);
+	width: 900px;
+	position: relative;
+}
+
+.logo {
+	font-size: 150px;
+	line-height: 115px;
+}
+
+.logo_2 {
+	font-size: 75px;
+	line-height: 70px;
+}
+.logo,
+.logo_2 {
+	width:100%;
+	margin: 0 auto;
+	display: inline-block;
+	text-align: center;
+	-moz-transition: font-size .3s ease-in;
+	-webkit-transition: font-size .3s ease-in;
+	-o-transition: font-size .3s ease-in;
+	transition: font-size .3s ease-in;
+}
+
+textarea { 
+	resize:none;
+	display: block;
+	margin: 0 auto;
+	width:900px;
+	background-color:transparent;
+	outline: 0px;
+	border: none;
+	padding: 0px;
+	-moz-transition: background-color .1s ease-in;
+	-webkit-transition: background-color .1s ease-in;
+	-o-transition: background-color .1s ease-in;
+	transition: background-color .1s ease-in;
+}
+
+.workspace {
+	background: white;
+	opacity: 1;
+}

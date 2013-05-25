@@ -10,16 +10,62 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <div class="container">
+            <header>
+                <h1 class="logo">BaudotCode</h1>
+                <h1 class="logo_2">Programming language</h1>
+            </header>
+
+            <div class="workspace">
+                <textarea cols="30" rows="10" id="teletype" placeholder="Type your uselesss code here..."></textarea>
+            </div>
+
+            
+        </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            $(function(){
+                blink = function(e, color){
+                    e.css('background-color', color);
+                    setTimeout(function(){
+                        e.css('background-color','transparent');
+                    },110)
+                        
+                }    
 
+                $('#teletype').on('keyup', function(){
+                   var val = $(this).val();
+                   if ((/[^0|^1]/g).test(val)) {
+                        blink($(this), '#EAA')
+                   }
+                   val = val.replace(/[^0|^1]/g,'');
+                   $(this).val(val);
+                });
+
+                $('#teletype').on('keypress', function(e) {
+                    switch (e.keyCode){
+                        case 45:
+                            return this.value.length == 0 ? true : false;
+                            break;
+                        case 48:
+                        case 49:
+                            return true;
+                            break;
+                        default:
+                            blink($(this), '#EAA')
+                            return false;
+                            break;
+                    }
+                });
+            })
+        </script>
     </body>
 </html>
