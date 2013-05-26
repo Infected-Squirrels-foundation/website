@@ -60,6 +60,10 @@ textarea {
 	width: 900px;
 	position: absolute;
 	top:0;
+	-moz-transition: top 1s ease-in;
+	-webkit-transition: top 1s ease-in;
+	-o-transition: top 1s ease-in;
+	transition: top 1s ease-in;
 }
 
 .paper {

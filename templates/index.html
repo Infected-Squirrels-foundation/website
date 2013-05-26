@@ -24,12 +24,12 @@
             </header>
 
             <div class="workspace">
-                <textarea cols="30" rows="10" id="teletype" placeholder="Type your uselesss code here...">1010100011001100010101010001010</textarea>
+                <textarea cols="30" rows="10" id="teletype" placeholder="Type your uselesss code here...">{{code}}</textarea>
                 <div class="stdout"></div>
                 <div class="paper_wrap"></div>
             </div>
             <div class="buttons">
-                <button onClick="go()">send</button>
+                <button onClick="go()">save</button>
             </div>
 
             <span class="width_template">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -82,6 +82,10 @@
                     }
                 });
 
+                if($('#teletype').val()) {
+                    $('#teletype').trigger('keyup');
+                    window.interpret()
+                }
 
             })
         </script>

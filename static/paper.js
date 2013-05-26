@@ -14,30 +14,58 @@
         return $('.stdout').html("wrong input length (need " + (10 - $('textarea').val().length % 10) + " more)");
       }
     }, 500);
-    return window.go = function() {
+    window.go = function() {
       var editor_height, line_width, val;
       line_width = $('.width_template').width();
       editor_height = $('textarea').height();
       $('textarea').hide();
       $('.buttons').hide();
+      $('.stdout').hide();
       val = $('textarea').val();
       $('<div class=\"paper\"></div>').appendTo('.paper_wrap').css({
         'min-height': editor_height
       }).text(val);
       return setTimeout(function() {
-        $('.paper').css({
+        return $('.paper').css({
           width: line_width
-        });
-        return setTimeout(function() {
+        }).afterTrans(500, function() {
           val = val.replace(/(\d{2})(\d{3})/g, '$1:$2');
           val = val.replace(/1/g, '●');
           val = val.replace(/0/g, '&nbsp;');
-          return $('.paper').html(val).css({
+          $('.paper').html(val).css({
             background: 'url(/static/paper_fibers.png)',
             'line-height': '.6em'
           });
-        }, 1500);
+          return $('.paper_wrap').css({
+            top: -($('.paper_wrap').height() + $('.paper_wrap').offset().top * 1.1)
+          }).afterTrans(window.save);
+        });
       }, 500);
+    };
+    window.save = function() {
+      $.post('/save', {
+        code: $('textarea').val()
+      }, function(id) {
+        var _ref;
+        if ((_ref = window.history) != null) {
+          _ref.pushState(0, 0, id);
+        }
+        return $("<h1><a href=\"/" + id + "\">/" + id + "</a></h1>").appendTo('.workspace');
+      });
+      return true;
+    };
+    return $.fn.afterTrans = function(extra_duration, func) {
+      if (typeof extra_duration === 'function') {
+        func = extra_duration;
+        extra_duration = 0;
+      }
+      return this.each(function() {
+        return $(this).on('transitionend webkittransitionend moztransitionend', function() {
+          return setTimeout(function() {
+            return func.call(this);
+          }, extra_duration);
+        });
+      });
     };
   });
 
