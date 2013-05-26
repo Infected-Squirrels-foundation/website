@@ -72,3 +72,10 @@ textarea {
 	-o-transition: width 1s ease-in;
 	transition: width 1s ease-in;
 }
+
+.stdout {
+	border-top: solid 1px grey;
+	background: lightgrey;
+	width: 900px;
+	height: 100px;
+}

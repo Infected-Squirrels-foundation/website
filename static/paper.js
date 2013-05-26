@@ -2,6 +2,18 @@
 (function() {
 
   $(function() {
+    window.interpret = _.debounce(function() {
+      if ($('textarea').val().length % 10 === 0) {
+        $('.stdout').html('loading...');
+        return $.post('/interpret', {
+          code: $('textarea').val()
+        }, function(res) {
+          return $('.stdout').html(res);
+        });
+      } else {
+        return $('.stdout').html("wrong input length (need " + (10 - $('textarea').val().length % 10) + " more)");
+      }
+    }, 500);
     return window.go = function() {
       var editor_height, line_width, val;
       line_width = $('.width_template').width();

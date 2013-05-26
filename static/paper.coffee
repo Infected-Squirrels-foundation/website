@@ -1,4 +1,16 @@
 $(->
+	# run code again and agagin
+	window.interpret =
+		_.debounce ->
+				if  $('textarea').val().length % 10 == 0
+					$('.stdout').html 'loading...' 
+					$.post  '/interpret',
+						code:$('textarea').val(),
+						(res)-> $('.stdout').html(res)
+				else
+					$('.stdout').html "wrong input length (need #{10 - $('textarea').val().length % 10} more)"
+		, 500
+
 	window.go = ->
 		line_width = $('.width_template').width();
 		editor_height = $('textarea').height()

@@ -25,6 +25,7 @@
 
             <div class="workspace">
                 <textarea cols="30" rows="10" id="teletype" placeholder="Type your uselesss code here...">1010100011001100010101010001010</textarea>
+                <div class="stdout"></div>
                 <div class="paper_wrap"></div>
             </div>
             <div class="buttons">
@@ -35,8 +36,12 @@
 
             
         </div>
-
+<!-- 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+         -->
+        <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='underscore-min.js') }}"></script>
         <script src="{{ url_for('static', filename='paper.js') }}"></script>
         <script>
             $(function(){
@@ -52,6 +57,8 @@
                    var val = $(this).val();
                    if ((/[^0|^1]/g).test(val)) {
                         blink($(this), '#EAA')
+                   } else {
+                        window.interpret()
                    }
                    val = val.replace(/[^0|^1]/g,'');
                    $(this).val(val);
@@ -60,10 +67,12 @@
                 $('#teletype').on('keypress', function(e) {
                     switch (e.keyCode){
                         case 45:
+                            window.interpret()
                             return this.value.length == 0 ? true : false;
                             break;
                         case 48:
                         case 49:
+                            window.interpret()
                             return true;
                             break;
                         default:
@@ -72,6 +81,8 @@
                             break;
                     }
                 });
+
+
             })
         </script>
     </body>
