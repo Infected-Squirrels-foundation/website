@@ -24,17 +24,30 @@
             </header>
 
             <div class="workspace">
+                <pre class="highlight"></pre>
                 <textarea cols="30" rows="10" id="teletype" placeholder="Type your uselesss code here...">{{code}}</textarea>
                 <div class="stdout"></div>
                 <div class="paper_wrap"></div>
             </div>
             <div class="buttons">
-                <button onClick="go()">save</button>
+                <button onClick="bcpl.go()">save</button>
+                <button class='highight_btn' onClick="bcpl.highlight_1()">highight</button>
             </div>
 
             <span class="width_template">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
-            
+            <script type="text/javascript">(function() {
+             if (window.pluso)if (typeof window.pluso.start == "function") return;
+             var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+             s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+             s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+             var h=d[g]('head')[0] || d[g]('body')[0];
+             h.appendChild(s);
+            })();</script>
+            <div class="oh_pluso">
+                <div class="pluso" data-options="big,square,line,horizontal,counter,theme=04" data-services="twitter,juick,tumblr,vkontakte,livejournal,odnoklassniki,facebook,google,moimir,email,print,blogger,delicious,evernote,formspring,digg,googlebookmark,pinteres,readability" data-background="transparent" data-title="BaudotCode" data-description="Yet another esoteric programming languages... the best one actually"></div>
+            </div>
+
         </div>
 <!-- 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -58,21 +71,22 @@
                    if ((/[^0|^1]/g).test(val)) {
                         blink($(this), '#EAA')
                    } else {
-                        window.interpret()
+                        window.bcpl.interpret()
                    }
                    val = val.replace(/[^0|^1]/g,'');
                    $(this).val(val);
                 });
 
                 $('#teletype').on('keypress', function(e) {
-                    switch (e.keyCode){
+                    code = e.charCode ? e.charCode : e.keyCode;
+                    switch (code){
                         case 45:
-                            window.interpret()
+                            window.bcpl.interpret()
                             return this.value.length == 0 ? true : false;
                             break;
                         case 48:
                         case 49:
-                            window.interpret()
+                            window.bcpl.interpret()
                             return true;
                             break;
                         default:
@@ -84,10 +98,10 @@
 
                 if($('#teletype').val()) {
                     $('#teletype').trigger('keyup');
-                    window.interpret()
+                    window.bcpl.interpret()
                 }
-
             })
         </script>
+
     </body>
 </html>

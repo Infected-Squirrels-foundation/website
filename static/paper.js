@@ -2,33 +2,38 @@
 (function() {
 
   $(function() {
-    window.interpret = _.debounce(function() {
-      if ($('textarea').val().length % 10 === 0) {
+    var real_editor;
+    window.bcpl = window.bcpl || {};
+    window.bcpl.interpret = _.debounce(function() {
+      if ($('#teletype').val().length % 10 === 0) {
         $('.stdout').html('loading...');
         return $.post('/interpret', {
-          code: $('textarea').val()
+          code: $('#teletype').val()
         }, function(res) {
           return $('.stdout').html(res);
         });
       } else {
-        return $('.stdout').html("wrong input length (need " + (10 - $('textarea').val().length % 10) + " more)");
+        return $('.stdout').html("wrong input length (need " + (10 - $('#teletype').val().length % 10) + " more)");
       }
-    }, 500);
-    window.go = function() {
+    }, 100);
+    window.bcpl.go = function() {
       var editor_height, line_width, val;
       line_width = $('.width_template').width();
-      editor_height = $('textarea').height();
-      $('textarea').hide();
+      editor_height = $('#teletype').height();
+      $('#teletype').hide();
       $('.buttons').hide();
       $('.stdout').hide();
-      val = $('textarea').val();
+      $('#teletype').hide();
+      $('.highlight').hide();
+      val = $('.highlight').html();
       $('<div class=\"paper\"></div>').appendTo('.paper_wrap').css({
         'min-height': editor_height
-      }).text(val);
+      }).html(val);
       return setTimeout(function() {
         return $('.paper').css({
           width: line_width
         }).afterTrans(500, function() {
+          val = $('#teletype').val();
           val = val.replace(/(\d{2})(\d{3})/g, '$1:$2');
           val = val.replace(/1/g, '●');
           val = val.replace(/0/g, '&nbsp;');
@@ -38,23 +43,36 @@
           });
           return $('.paper_wrap').css({
             top: -($('.paper_wrap').height() + $('.paper_wrap').offset().top * 1.1)
-          }).afterTrans(window.save);
+          }).afterTrans(function() {
+            $('.paper').text('●:●●●●●:●●●●●:● ● ●: ● ● :● ●');
+            return $('.paper_wrap').css({
+              top: 0
+            }).afterTrans(function() {
+              return $('.paper').css({
+                width: 900
+              }).afterTrans(function() {
+                $('.paper_wrap').hide();
+                $('.workspace').css('text-align', 'center');
+                return window.bcpl.save();
+              });
+            });
+          });
         });
       }, 500);
     };
-    window.save = function() {
+    window.bcpl.save = function() {
       $.post('/save', {
-        code: $('textarea').val()
+        code: $('#teletype').val()
       }, function(id) {
         var _ref;
         if ((_ref = window.history) != null) {
           _ref.pushState(0, 0, id);
         }
-        return $("<h1><a href=\"/" + id + "\">/" + id + "</a></h1>").appendTo('.workspace');
+        return $("<h1><a href=\"/" + id + "\">" + window.location.href + "</a></h1>").appendTo('.workspace');
       });
       return true;
     };
-    return $.fn.afterTrans = function(extra_duration, func) {
+    $.fn.afterTrans = function(extra_duration, func) {
       if (typeof extra_duration === 'function') {
         func = extra_duration;
         extra_duration = 0;
@@ -65,6 +83,56 @@
             return func.call(this);
           }, extra_duration);
         });
+      });
+    };
+    real_editor = $('#teletype');
+    $('.highlight').width(real_editor.width());
+    $('.highlight').height(real_editor.height());
+    $('#teletype').on('keyup', function() {
+      return $('.highlight').html($(this).val());
+    });
+    window.bcpl.highlight_1 = function() {
+      var hl;
+      $('.highight_btn').attr('onClick', 'bcpl.highlight_2()');
+      $('.highight_btn').text('more colors');
+      $('.highlight').css({
+        color: 'black'
+      });
+      $('#teletype').css({
+        color: 'transparent'
+      });
+      hl = function() {
+        var val;
+        val = $('#teletype').val();
+        val = val.replace(/(\d{5})(\d{1,5})/g, '<span style="font-weight:bold">$1</span><span style="font-weight:bold;color: grey;" class="operand">$2</span>');
+        return $('.highlight').html(val);
+      };
+      hl();
+      return $('#teletype').on('keyup', function() {
+        return hl();
+      });
+    };
+    return window.bcpl.highlight_2 = function() {
+      var hl;
+      $('.highight_btn').text('that\'s enought');
+      $('.highight_btn').attr('disabled', 'disabled');
+      $('.highlight').css({
+        'font-weight': 'bold'
+      });
+      $('#teletype').css({
+        color: 'transparent'
+      });
+      hl = function() {
+        var val;
+        val = $('#teletype').val();
+        val = _.map(val, function(s) {
+          return "<span style=\"color:hsl(" + (Math.random() * 180) + ",80%,40%);font-weight:bold\" class=\"operand\">" + s + "</span>";
+        });
+        return $('.highlight').html(val);
+      };
+      hl();
+      return $('#teletype').on('keyup', function() {
+        return hl();
       });
     };
   });

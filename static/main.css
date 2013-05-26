@@ -50,6 +50,19 @@ textarea {
 	transition: background-color .1s ease-in;
 }
 
+.highlight {
+	position: absolute;
+	top:0;
+	pointer-events:none;
+	background:url('http://1x1px.me/FFFFFF-0.png');
+	color: transparent;
+	margin:0;
+	padding: 0;
+	outline: 0;
+	font-family: courier, monospace;
+	word-wrap: break-word;
+}
+
 .workspace {
 	background: white;
 	opacity: 1;
@@ -82,4 +95,10 @@ textarea {
 	background: lightgrey;
 	width: 900px;
 	height: 100px;
+	word-wrap: break-word;
+}
+
+.oh_pluso {
+	position: absolute;
+	bottom:0;
 }
