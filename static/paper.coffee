@@ -92,7 +92,7 @@ $(->
 			hl()
 
 	window.bcpl.highlight_2 = ->
-		$('.highight_btn').text('that\'s enought')
+		$('.highight_btn').text('enough colors!')
 		$('.highight_btn').attr('disabled', 'disabled')
 
 		$('.highlight').css('font-weight': 'bold')
@@ -100,7 +100,7 @@ $(->
 		hl = -> 
 			val = $('#teletype').val()
 			val = _.map val, (s)->
-				"<span style=\"color:hsl(#{Math.random()*180},80%,40%);font-weight:bold\" class=\"operand\">#{s}</span>"
+				"<span style=\"color:hsl(#{Math.random()*180},90%,70%);font-weight:bold\" class=\"operand\">#{s}</span>"
 			$('.highlight').html(val)
 		hl()
 		$('#teletype').on 'keyup', ->

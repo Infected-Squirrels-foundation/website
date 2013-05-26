@@ -114,7 +114,7 @@
     };
     return window.bcpl.highlight_2 = function() {
       var hl;
-      $('.highight_btn').text('that\'s enought');
+      $('.highight_btn').text('enough colors!');
       $('.highight_btn').attr('disabled', 'disabled');
       $('.highlight').css({
         'font-weight': 'bold'
@@ -126,7 +126,7 @@
         var val;
         val = $('#teletype').val();
         val = _.map(val, function(s) {
-          return "<span style=\"color:hsl(" + (Math.random() * 180) + ",80%,40%);font-weight:bold\" class=\"operand\">" + s + "</span>";
+          return "<span style=\"color:hsl(" + (Math.random() * 180) + ",90%,70%);font-weight:bold\" class=\"operand\">" + s + "</span>";
         });
         return $('.highlight').html(val);
       };

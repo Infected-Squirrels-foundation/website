@@ -12,7 +12,7 @@ html, body {
 
 .container {
 	margin: 1em auto;
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: rgba(122, 122, 122, 0.8);
 	width: 900px;
 	position: relative;
 	height: 100%;
@@ -101,4 +101,12 @@ textarea {
 .oh_pluso {
 	position: absolute;
 	bottom:0;
+}
+
+.buttons {
+	text-align: center;
+}
+
+.buttons a {
+	background: white;
 }
